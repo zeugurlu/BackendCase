@@ -22,4 +22,41 @@ public class UsersService implements IUsersService {
         logger.info("UsersService getAll() function successfully worked.");
         return this.users.findAll();
     }
+
+    @Override
+    public Users getById(Integer id) {
+        logger.info("UsersService getById() function successfully worked.");
+        Users idUser = this.users.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found."));
+        return idUser;
+    }
+
+    @Override
+    public Users post(Users users) {
+        logger.info("UsersService post() function successfully worked.");
+        return this.users.save(users);
+    }
+
+    @Override
+    public Users delete(Integer id) {
+        logger.info("UsersService delete() function successfully worked.");
+        Users deletedUser = this.users.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found."));
+
+        this.users.delete(deletedUser);
+        return deletedUser;
+    }
+
+    @Override
+    public Users put(Integer id, Users users) {
+        Users existingUser = this.users.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found."));
+
+        existingUser.setUsername(users.getUsername());
+        existingUser.setPassword(users.getPassword());
+
+        return this.users.save(existingUser);
+    }
+
+
 }
