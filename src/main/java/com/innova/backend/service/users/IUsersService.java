@@ -1,5 +1,6 @@
 package com.innova.backend.service.users;
 
+import com.innova.backend.entity.Transactions;
 import com.innova.backend.entity.Users;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface IUsersService {
     Users post(Users users);
     Users delete(Integer id);
     Users put(Integer id,Users users);
+    List<Transactions> getTransactionsByUserId(Integer id);
 }

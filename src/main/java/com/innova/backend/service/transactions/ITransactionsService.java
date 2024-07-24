@@ -1,5 +1,9 @@
 package com.innova.backend.service.transactions;
 
-public interface ITransactionsService {
+import com.innova.backend.entity.Transactions;
 
+import java.util.List;
+
+public interface ITransactionsService {
+    List<Transactions> getAll();
 }

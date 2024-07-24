@@ -1,5 +1,6 @@
 package com.innova.backend.service.users.impl;
 
+import com.innova.backend.entity.Transactions;
 import com.innova.backend.entity.Users;
 import com.innova.backend.repository.IUsers;
 import com.innova.backend.service.users.IUsersService;
@@ -57,6 +58,14 @@ public class UsersService implements IUsersService {
 
         return this.users.save(existingUser);
     }
+
+    @Override
+    public List<Transactions> getTransactionsByUserId(Integer id) {
+        Users existingUser = this.users.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found."));
+        return existingUser.getTransactions();
+    }
+
 
 
 }

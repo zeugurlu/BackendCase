@@ -1,5 +1,6 @@
 package com.innova.backend.controller.usersController;
 
+import com.innova.backend.entity.Transactions;
 import com.innova.backend.entity.Users;
 import com.innova.backend.service.users.IUsersService;
 import com.innova.backend.service.users.impl.UsersService;
@@ -23,7 +24,7 @@ public class UsersController {
     @GetMapping("/get/{id}")
     public Users getById(@PathVariable Integer id){
         try {
-            logger.info("inside CustomerController.getAll() worked.");
+            logger.info("inside UserController.getAll() worked.");
             return this.iUsersService.getById(id);
         } catch (Exception e) {
             logger.error("Error", e );
@@ -33,7 +34,7 @@ public class UsersController {
     @GetMapping
     public List<Users> getAll(){
         try {
-            logger.info("inside CustomerController.getAll() worked.");
+            logger.info("inside UserController.getAll() worked.");
             return this.iUsersService.getAll();
         } catch (Exception e) {
             logger.error("Error", e );
@@ -41,10 +42,21 @@ public class UsersController {
         }
     }
 
+    @GetMapping("/getTransactions/{id}")
+    public List<Transactions> getTransactionsByUserId(@PathVariable Integer id) {
+        try {
+            logger.info("inside UserController.getTransactionsByUserId() worked.");
+            return this.iUsersService.getTransactionsByUserId(id);
+        } catch (Exception e) {
+            logger.error("Error", e);
+            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.toString());
+        }
+    }
+
     @PostMapping
     public Users add(@RequestBody Users users) {
         try {
-            logger.info("inside CustomerController.post() worked.");
+            logger.info("inside UserController.post() worked.");
             return this.iUsersService.post(users);
         } catch (Exception e) {
             logger.error("Error", e );
@@ -69,7 +81,7 @@ public class UsersController {
     @PutMapping("/put/{id}")
     public Users put(@PathVariable Integer id, @RequestBody Users users) {
         try {
-            logger.info("inside CustomerController.put() worked.");
+            logger.info("inside UserController.put() worked.");
             return this.iUsersService.put(id, users);
         } catch (Exception e) {
             logger.error("Error", e );
