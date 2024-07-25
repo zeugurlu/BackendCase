@@ -64,6 +64,17 @@ public class UsersController {
         }
     }
 
+    @PostMapping("/addTransaction/{id}")
+    public List<Transactions> addTransaction(@PathVariable Integer id, @RequestBody Transactions transactions) {
+        try {
+            logger.info("inside UserController.addTransaction() worked.");
+            return this.iUsersService.addTransactionToUser(id,transactions);
+        } catch (Exception e) {
+            logger.error("Error", e );
+            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.toString());
+        }
+    }
+
     @DeleteMapping("/delete/{id}")
     public Users delete(@PathVariable Integer id) {
         try {

@@ -12,4 +12,6 @@ public interface IUsersService {
     Users delete(Integer id);
     Users put(Integer id,Users users);
     List<Transactions> getTransactionsByUserId(Integer id);
+    Integer getTotalTransactionsAmount(Integer id);
+    List<Transactions> addTransactionToUser(Integer id, Transactions transactions);
 }

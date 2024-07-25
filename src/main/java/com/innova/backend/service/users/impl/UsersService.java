@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -65,6 +66,44 @@ public class UsersService implements IUsersService {
                 .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found."));
         return existingUser.getTransactions();
     }
+
+    @Override
+    public Integer getTotalTransactionsAmount(Integer userId) {
+        Users user = this.users.findById(userId).orElse(null);
+        int totalAmount = 0;
+        if (user == null) {
+            logger.info("User not found");
+            return 0;
+        }else {
+            for (Transactions transaction : user.getTransactions()) {
+                totalAmount += transaction.getAmount();
+            }
+        }
+
+        return totalAmount;
+    }
+
+    public List<Transactions> addTransactionToUser(Integer id, Transactions transaction) {
+        Users user = this.users.findById(id).orElse(null);
+        if (user == null) {
+            logger.info("The user not found");
+            return null;
+        }
+
+          transaction.setDate(LocalDate.now());
+//        Transactions transaction = new Transactions();
+//        transaction.setAmount(amount);
+//        transaction.setDescription(description);
+//        transaction.setType(type);
+//        transaction.setDate(date);
+        transaction.setUser(user);
+        user.getTransactions().add(transaction);
+
+        this.users.save(user);
+
+        return user.getTransactions();
+    }
+
 
 
 
