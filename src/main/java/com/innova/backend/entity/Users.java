@@ -32,6 +32,7 @@ public class Users {
     @Column(name = "role")
     private String role;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Transactions> transactions;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Transactions> transactions;
+
 }

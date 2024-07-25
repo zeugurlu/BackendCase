@@ -60,49 +60,49 @@ public class UsersService implements IUsersService {
         return this.users.save(existingUser);
     }
 
-    @Override
-    public List<Transactions> getTransactionsByUserId(Integer id) {
-        Users existingUser = this.users.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found."));
-        return existingUser.getTransactions();
-    }
+//    @Override
+//    public List<Transactions> getTransactionsByUserId(Integer id) {
+//        Users existingUser = this.users.findById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found."));
+//        return existingUser.getTransactions();
+//    }
 
-    @Override
-    public Integer getTotalTransactionsAmount(Integer userId) {
-        Users user = this.users.findById(userId).orElse(null);
-        int totalAmount = 0;
-        if (user == null) {
-            logger.info("User not found");
-            return 0;
-        }else {
-            for (Transactions transaction : user.getTransactions()) {
-                totalAmount += transaction.getAmount();
-            }
-        }
+//    @Override
+//    public Integer getTotalTransactionsAmount(Integer userId) {
+//        Users user = this.users.findById(userId).orElse(null);
+//        int totalAmount = 0;
+//        if (user == null) {
+//            logger.info("User not found");
+//            return 0;
+//        }else {
+//            for (Transactions transaction : user.getTransactions()) {
+//                totalAmount += transaction.getAmount();
+//            }
+//        }
+//
+//        return totalAmount;
+//    }
 
-        return totalAmount;
-    }
+//    public List<Transactions> addTransactionToUser(Integer id, Transactions transaction) {
+//        Users user = this.users.findById(id).orElse(null);
+//        if (user == null) {
+//            logger.info("The user not found");
+//            return null;
+//        }
 
-    public List<Transactions> addTransactionToUser(Integer id, Transactions transaction) {
-        Users user = this.users.findById(id).orElse(null);
-        if (user == null) {
-            logger.info("The user not found");
-            return null;
-        }
-
-          transaction.setDate(LocalDate.now());
+//          transaction.setDate(LocalDate.now());
 //        Transactions transaction = new Transactions();
 //        transaction.setAmount(amount);
 //        transaction.setDescription(description);
 //        transaction.setType(type);
 //        transaction.setDate(date);
-        transaction.setUser(user);
-        user.getTransactions().add(transaction);
-
-        this.users.save(user);
-
-        return user.getTransactions();
-    }
+//        transaction.setUser(user);
+//        user.getTransactions().add(transaction);
+//
+//        this.users.save(user);
+//
+//        return user.getTransactions();
+//    }
 
 
 
