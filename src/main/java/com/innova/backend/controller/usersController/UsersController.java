@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/users")
 @RequiredArgsConstructor
 public class UsersController {
 
@@ -24,7 +24,7 @@ public class UsersController {
     @GetMapping("/get/{id}")
     public Users getById(@PathVariable Integer id){
         try {
-            logger.info("inside UserController.getAll() worked.");
+            logger.info("inside UserController.getById() worked.");
             return this.iUsersService.getById(id);
         } catch (Exception e) {
             logger.error("Error", e );
@@ -42,16 +42,16 @@ public class UsersController {
         }
     }
 
-    @GetMapping("/getTransactions/{id}")
-    public List<Transactions> getTransactionsByUserId(@PathVariable Integer id) {
-        try {
-            logger.info("inside UserController.getTransactionsByUserId() worked.");
-            return this.iUsersService.getTransactionsByUserId(id);
-        } catch (Exception e) {
-            logger.error("Error", e);
-            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.toString());
-        }
-    }
+//    @GetMapping("/getTransactions/{id}")
+//    public List<Transactions> getTransactionsByUserId(@PathVariable Integer id) {
+//        try {
+//            logger.info("inside UserController.getTransactionsByUserId() worked.");
+//            return this.iUsersService.getTransactionsByUserId(id);
+//        } catch (Exception e) {
+//            logger.error("Error", e);
+//            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.toString());
+//        }
+//    }
 
     @PostMapping
     public Users add(@RequestBody Users users) {
@@ -63,6 +63,17 @@ public class UsersController {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.toString());
         }
     }
+
+//    @PostMapping("/addTransaction/{id}")
+//    public List<Transactions> addTransaction(@PathVariable Integer id, @RequestBody Transactions transactions) {
+//        try {
+//            logger.info("inside UserController.addTransaction() worked.");
+//            return this.iUsersService.addTransactionToUser(id,transactions);
+//        } catch (Exception e) {
+//            logger.error("Error", e );
+//            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.toString());
+//        }
+//    }
 
     @DeleteMapping("/delete/{id}")
     public Users delete(@PathVariable Integer id) {
