@@ -21,4 +21,6 @@ public class SpendingController {
         return totalSpending;
     }
 
+
+
 }
